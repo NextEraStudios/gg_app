@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Get DOM Elements ---
     const sidebar = document.getElementById('sidebar');
     const menuToggle = document.getElementById('menu-toggle');
+    const pageOverlay = document.getElementById('page-overlay'); // New Overlay
     const navLinksContainer = document.getElementById('nav-links');
     const themeToggle = document.getElementById('theme-toggle');
     const investorsBtn = document.getElementById('investors-btn');
@@ -31,26 +32,17 @@ document.addEventListener('DOMContentLoaded', function() {
         { text: 'My Account', icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4A4 4 0 0 1 16 8A4 4 0 0 1 12 12A4 4 0 0 1 8 8A4 4 0 0 1 12 4M12 14C16.42 14 20 15.79 20 18V20H4V18C4 15.79 7.58 14 12 14Z" /></svg>`, href: '#' },
     ];
     
-    // --- Data ---
+    // --- Data (omitted for brevity) ---
     const data = {
         investors: [
             { id: 'inv1', name: 'Alex Chen', info: 'Angel Investor | Ex-Founder at Innovate Inc.', imageUrl: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80', interests: ['FinTech', 'AI/ML', 'SaaS', 'Web3'], description: 'Seasoned angel investor with two successful exits in the FinTech space. Alex is passionate about mentoring early-stage founders and helping them scale their ideas into market-leading companies.' },
             { id: 'inv2', name: 'Brenda Smith', info: 'Partner at Horizon Ventures', imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80', interests: ['E-commerce', 'GreenTech', 'B2C'], description: 'Brenda leads the consumer tech division at Horizon Ventures. She focuses on sustainable and ethical brands that are making a positive impact on the world, particularly in the e-commerce and GreenTech sectors.' },
             { id: 'inv3', name: 'Carlos Gomez', info: 'Early Stage & Seed Investor', imageUrl: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80', interests: ['Deep Tech', 'Hardware', 'Robotics'], description: 'With a background in engineering, Carlos is drawn to complex technical challenges. He provides crucial seed funding for startups in robotics, hardware, and other deep tech fields.' },
             { id: 'inv4', name: 'Diana Reed', info: 'Founder of Reed Capital', imageUrl: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=761&q=80', interests: ['HealthTech', 'FemTech', 'Wellness'], description: 'Diana founded Reed Capital to support innovations in healthcare. She is a strong advocate for female founders and is particularly interested in FemTech and digital wellness platforms.' },
-            { 
-                id: 'inv5', 
-                name: 'Ethan Wong', 
-                info: 'Crypto & DeFi Specialist', 
-                // UPDATED URL: This is the new, working image link.
-                imageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80', 
-                interests: ['Web3', 'DeFi', 'NFTs', 'Metaverse'], 
-                description: 'Ethan is a leading voice in the decentralized finance space. He focuses on projects that are building the next generation of the internet on the blockchain.' 
-            },
+            { id: 'inv5', name: 'Ethan Wong', info: 'Crypto & DeFi Specialist', imageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80', interests: ['Web3', 'DeFi', 'NFTs', 'Metaverse'], description: 'Ethan is a leading voice in the decentralized finance space. He focuses on projects that are building the next generation of the internet on the blockchain.' },
             { id: 'inv6', name: 'Fiona Clark', info: 'Impact Investor at Earthward Fund', imageUrl: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80', interests: ['Sustainability', 'Circular Economy', 'EdTech'], description: 'Fiona believes in a double bottom line: financial returns and positive social impact. She invests in companies that are solving major world problems, from climate change to education access.' }
         ],
         startups: [
-            // ... the startup data remains the same ...
             { id: 'sta1', name: 'ConnectSphere', info: 'Building the future of decentralized social media.', imageUrl: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80', interests: ['Seed Round', '$250k', 'Web3'], description: 'ConnectSphere is a decentralized social media platform that gives users full control over their data and content. We are seeking seed funding to expand our development team and launch our beta product.' },
             { id: 'sta2', name: 'GreenLeaf AI', info: 'AI-powered solutions for sustainable agriculture.', imageUrl: 'https://images.unsplash.com/photo-1505826759037-406b40feb4cd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80', interests: ['Series A', '$1.5M', 'AI/ML', 'GreenTech'], description: 'GreenLeaf AI uses machine learning to help farmers increase crop yields while reducing water and pesticide usage. Our platform has already helped partners reduce their environmental impact by an average of 30%.' },
             { id: 'sta3', name: 'FitTrack', info: 'Personalized fitness coaching in your pocket.', imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80', interests: ['Pre-seed', '$50k', 'HealthTech'], description: 'FitTrack is a mobile app that uses your phone\'s camera to provide real-time feedback on your exercise form. We are looking for pre-seed capital to finalize our MVP and onboard our first cohort of beta testers.' },
@@ -70,6 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function setupEventListeners() {
         menuToggle.addEventListener('click', toggleSidebar);
+        pageOverlay.addEventListener('click', closeSidebar); // Close on overlay click
         themeToggle.addEventListener('change', handleThemeToggle);
         investorsBtn.addEventListener('click', () => switchFeed('investors'));
         startupsBtn.addEventListener('click', () => switchFeed('startups'));
@@ -81,7 +74,31 @@ document.addEventListener('DOMContentLoaded', function() {
         navLinksContainer.addEventListener('click', handleNavClick);
     }
     
-    function toggleSidebar(e) { e.stopPropagation(); sidebar.classList.toggle('active'); menuToggle.classList.toggle('active'); }
+    // --- Sidebar Controls ---
+    function toggleSidebar(e) { 
+        e.stopPropagation(); 
+        const isActive = sidebar.classList.contains('active');
+        if (isActive) {
+            closeSidebar();
+        } else {
+            openSidebar();
+        }
+    }
+
+    function openSidebar() {
+        sidebar.classList.add('active');
+        menuToggle.classList.add('active');
+        pageOverlay.classList.add('active');
+        document.body.classList.add('modal-open'); // Prevent background scrolling
+    }
+
+    function closeSidebar() {
+        sidebar.classList.remove('active');
+        menuToggle.classList.remove('active');
+        pageOverlay.classList.remove('active');
+        document.body.classList.remove('modal-open');
+    }
+
     function handleThemeToggle(e) { applyTheme(e.target.checked ? 'light' : 'dark'); }
     function handleSearch(e) { searchTerm = e.target.value.toLowerCase(); renderFeed(); }
     
@@ -116,6 +133,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (link) {
             document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
             link.classList.add('active');
+            // Close sidebar if it's open (for mobile)
+            if (sidebar.classList.contains('active')) {
+                closeSidebar();
+            }
         }
     }
 
@@ -160,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function generateFeed(items) {
         feedContainer.innerHTML = '';
         if (items.length === 0) {
-            feedContainer.innerHTML = `<p class="no-results">No results found.</p>`; // You might want to style this class
+            feedContainer.innerHTML = `<p class="no-results">No results found.</p>`;
             return;
         }
         items.forEach((item, index) => {
@@ -224,7 +245,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function closeModal() {
         modal.classList.remove('visible');
-        document.body.classList.remove('modal-open');
+        // Only remove modal-open if sidebar is not active
+        if (!sidebar.classList.contains('active')) {
+            document.body.classList.remove('modal-open');
+        }
     }
     
     function buildNav() {
