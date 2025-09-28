@@ -1,0 +1,7 @@
+.lexend_templates_add_button {
+    background: #e3e3e3;
+}
+.elementor-add-new-section .lexend_templates_add_button {
+    padding: 0 !important;
+    overflow: hidden;
+}

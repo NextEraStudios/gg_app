@@ -1,0 +1,28 @@
+.mega-menu {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s;
+    width: 100%;
+    background-color: #ececec;
+    left: 0%;
+    right: 0;
+    top: 100%;
+}
+.has-megamenu-elementor {
+    position: static !important;
+}
+.has-megamenu-elementor:hover .mega-menu,
+.has-megamenu-default:hover .mega-menu{
+    visibility: visible;
+    opacity: 1;
+}
+nav {
+    position: relative;
+}
+li.menu-item > a > i {
+    display: inline-block;
+    margin-right: 2px;
+    line-height: 1;
+    position: relative;
+}
