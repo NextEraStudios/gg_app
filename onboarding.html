@@ -40,7 +40,7 @@
         }
 
         body, html {
-            height: 100%;
+            min-height: 100vh; /* Changed from height to min-height */
             margin: 0;
             background-color: var(--background-color);
             font-family: var(--font-family);
@@ -48,12 +48,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
 
         .onboarding-container {
             width: 100%;
-            height: 100%;
+            min-height: 100vh; /* Changed from height to min-height */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -429,6 +429,25 @@
             }
         }
 
+        @media (max-width: 768px) {
+            body {
+                align-items: flex-start; /* Align content to the top on mobile */
+            }
+
+            .onboarding-container {
+                padding: 20px 15px;
+                justify-content: flex-start;
+            }
+
+            .onboarding-container.progress-visible {
+                padding-top: 80px; /* Ensure padding for progress bar remains */
+            }
+            
+            .onboarding-step {
+                padding: 20px 0;
+            }
+        }
+
         @media (max-width: 600px) {
             .options-grid.two-columns {
                 grid-template-columns: 1fr;
@@ -751,6 +770,8 @@
             const firstQuestionId = onboardingFlow[role][1]; // The first question is at index 1
             goToStep(firstQuestionId);
         }
+
+
 
         function toggleSelection(element) {
             element.classList.toggle('selected');
