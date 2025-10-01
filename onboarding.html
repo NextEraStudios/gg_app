@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onboarding - Syndesis</title>
+    <link rel="icon" href="wp-content/uploads/2025/07/cropped-eight-fav-32x32.png" sizes="32x32">
+    <link rel="icon" href="wp-content/uploads/2025/07/cropped-eight-fav-192x192.png" sizes="192x192">
+    <link rel="apple-touch-icon" href="wp-content/uploads/2025/07/cropped-eight-fav-180x180.png">
+    <meta name="msapplication-TileImage" content="https://lexend.themegenix.com/nine/wp-content/uploads/2025/07/cropped-eight-fav-270x270.png">
+    <style id="kirki-inline-styles">.uc-dark .uc-pageloader, .uc-pageloader:where(.uc-dark){background-color:#052128;}</style>
+
+    <style>
+        /* 
+         * ===================================================================
+         * FONT DEFINITION
+         * ===================================================================
+        */
+        @font-face {
+            font-family: 'PolySans';
+            src: url('fonts/polysanstrial-medianwide.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* 
+         * ===================================================================
+         * BASE STYLES & VARIABLES (Inspired by Syndesis Landing Page)
+         * ===================================================================
+        */
+        :root {
+            --background-color: #0c2b35;
+            --primary-accent: #c1ffb4;
+            --text-color-light: #ffffff;
+            --text-color-dark: #000000;
+            --border-color: rgba(255, 255, 255, 0.2);
+            --card-bg-color: rgba(255, 255, 255, 0.05);
+            --card-bg-hover: rgba(255, 255, 255, 0.1);
+            --font-family: "PolySans", sans-serif;
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+            background-color: var(--background-color);
+            font-family: var(--font-family);
+            color: var(--text-color-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .onboarding-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: padding-top 0.3s ease-in-out;
+           
+        }
+        
+        /* This class is added via JS when the progress bar is visible */
+        .onboarding-container.progress-visible {
+            padding-top: 80px;
+            justify-content: flex-start;
+        }
+
+        .onboarding-step {
+            display: none;
+            width: 100%;
+            max-width: 900px; /* Increased max-width for pricing layout */
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+            padding: 40px 0;
+        }
+
+        .onboarding-step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* 
+         * ===================================================================
+         * PROGRESS BAR
+         * ===================================================================
+        */
+        .progress-bar-container {
+            width: 100%;
+            max-width: 550px;
+            height: 8px;
+            background-color: var(--card-bg-color);
+            border-radius: 4px;
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: none; /* Hidden by default */
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background-color: var(--primary-accent);
+            border-radius: 4px;
+            transition: width 0.4s ease-in-out;
+        }
+
+        /* 
+         * ===================================================================
+         * TYPOGRAPHY & SHARED ELEMENTS
+         * ===================================================================
+        */
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 2.5rem;
+        }
+        
+        p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            max-width: 550px; /* Constrain paragraph width */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--border-color);
+            margin: 2rem auto;
+            max-width: 550px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .divider:not(:empty)::before {
+            margin-right: .5em;
+        }
+
+        .divider:not(:empty)::after {
+            margin-left: .5em;
+        }
+
+        /* 
+         * ===================================================================
+         * BUTTONS
+         * ===================================================================
+        */
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            border: 1px solid transparent;
+            transition: background-color 0.3s, border-color 0.3s;
+            box-sizing: border-box;
+            margin-bottom: 1rem;
+            font-family: var(--font-family); /* <-- FONT FIX */
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-accent);
+            color: var(--text-color-dark);
+            border-color: var(--primary-accent);
+        }
+
+        .btn-primary:hover {
+            background-color: #aee0a4; /* A slightly darker shade */
+            border-color: #aee0a4;
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-color-light);
+            border-color: var(--border-color);
+        }
+        .btn-secondary:hover {
+            background-color: var(--card-bg-hover);
+            border-color: var(--primary-accent);
+        }
+
+        .btn-social {
+            background-color: transparent;
+            color: var(--text-color-light);
+            border-color: var(--border-color);
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-social:hover {
+            background-color: var(--card-bg-hover);
+        }
+
+        .btn-social svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .btn-continue {
+            max-width: 200px;
+            margin: 2.5rem auto 0;
+        }
+
+        .sub-link {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .sub-link a {
+            color: var(--primary-accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .sub-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* 
+         * ===================================================================
+         * FORMS & INPUTS
+         * ===================================================================
+        */
+        .form-group {
+            margin-bottom: 1.2rem;
+            text-align: left;
+        }
+        
+        form {
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--card-bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-color-light);
+            font-size: 1rem;
+            box-sizing: border-box;
+            font-family: var(--font-family); /* <-- FONT FIX */
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-accent);
+            box-shadow: 0 0 0 2px rgba(193, 255, 180, 0.3);
+        }
+
+
+        /* 
+         * ===================================================================
+         * QUESTION CARDS
+         * ===================================================================
+        */
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            max-width: 550px;
+            margin: 0 auto;
+        }
+        
+        .options-grid.two-columns {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .option-card, .option-button {
+            background: var(--card-bg-color);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .option-button {
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .option-card:hover, .option-button:hover {
+            background: var(--card-bg-hover);
+            border-color: var(--primary-accent);
+        }
+        
+        .option-card.selected, .option-button.selected {
+            background: var(--card-bg-hover);
+            border-color: var(--primary-accent);
+            box-shadow: 0 0 15px rgba(193, 255, 180, 0.3);
+        }
+
+        .option-card h3 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* 
+         * ===================================================================
+         * PRICING CARDS
+         * ===================================================================
+        */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            width: 100%;
+            margin-top: 2rem;
+        }
+        
+        .pricing-grid-investor {
+            grid-template-columns: repeat(2, 1fr);
+            max-width: 650px; /* Constrain width for 2 cards */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .pricing-card {
+            background: var(--card-bg-color);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            position: relative; /* For the recommended badge */
+            overflow: hidden;
+        }
+
+        .pricing-card.pro {
+            border-color: var(--primary-accent);
+            box-shadow: 0 0 25px rgba(193, 255, 180, 0.2);
+        }
+
+        .recommended-badge {
+            position: absolute;
+            top: 15px;
+            right: -45px;
+            background-color: var(--primary-accent);
+            color: var(--text-color-dark);
+            padding: 8px 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transform: rotate(45deg);
+            transform-origin: top left;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin: 0 0 0.5rem 0;
+        }
+        
+        .pricing-card .price {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-card .price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .pricing-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 2rem 0;
+            flex-grow: 1; /* Pushes button to the bottom */
+        }
+        
+        .pricing-card ul li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .pricing-card ul li svg {
+            width: 20px;
+            height: 20px;
+            color: var(--primary-accent);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Responsive */
+        @media (max-width: 950px) {
+            .pricing-grid, .pricing-grid-investor {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .options-grid.two-columns {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="onboarding-container">
+        <!-- Progress Bar (Initially hidden) -->
+        <div class="progress-bar-container">
+            <div class="progress-bar"></div>
+        </div>
+
+        <!-- STEP 1: AUTHENTICATION -->
+        <div id="step-1" class="onboarding-step active">
+            <h1>Create your account</h1>
+            <p>Join the next generation of founders and funders.</p>
+            <div style="margin: 2rem 0;">
+                <a href="#" class="btn btn-social">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Google</title><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.85 3.18-1.73 4.1-1.02 1.02-2.3 1.62-3.85 1.62-4.64 0-8.52-3.82-8.52-8.52s3.88-8.52 8.52-8.52c2.65 0 4.33 1.02 5.35 2.02l2.62-2.62C18.42 1.18 15.82 0 12.48 0 5.6 0 0 5.6 0 12.5S5.6 25 12.48 25c3.58 0 6.2-1.22 8.22-3.25 2.1-2.1 2.86-5.22 2.86-7.85 0-.54-.05-1.08-.14-1.6z" fill="currentColor"/></svg>
+                    Continue with Google
+                </a>
+                 <a href="#" class="btn btn-social">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z" fill="currentColor"/></svg>
+                    Continue with LinkedIn
+                </a>
+            </div>
+
+            <div class="divider">OR</div>
+
+            <form>
+                <div class="form-group">
+                    <input type="email" placeholder="Email address" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Password" required>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="goToStep('step-2')">Create Account</button>
+            </form>
+            <p class="sub-link">Already have an account? <a href="#">Log in</a></p>
+        </div>
+        
+        <!-- STEP 2: ROLE SELECTION -->
+        <div id="step-2" class="onboarding-step">
+             <h2>I am...</h2>
+             <div class="options-grid two-columns">
+                <div class="option-card" onclick="selectRole('investor')">
+                    <h3>An Investor</h3>
+                    <p>Looking for the next portfolio winner.</p>
+                </div>
+                <div class="option-card" onclick="selectRole('startup')">
+                     <h3>A Startup Founder</h3>
+                     <p>Looking for funding and partners.</p>
+                </div>
+             </div>
+        </div>
+
+        <!-- =================================================================== -->
+        <!-- STARTUP-SPECIFIC QUESTIONS -->
+        <!-- =================================================================== -->
+
+        <!-- STEP 3 (STARTUP): INDUSTRY -->
+        <div id="step-3-startup" class="onboarding-step">
+            <h2>What industry best describes your startup?</h2>
+            <p>This helps us match you with the right investors.</p>
+            <div class="options-grid two-columns">
+                 <div class="option-button" onclick="selectAndContinue(this)">FinTech</div>
+                 <div class="option-button" onclick="selectAndContinue(this)">HealthTech</div>
+                 <div class="option-button" onclick="selectAndContinue(this)">AI & ML</div>
+                 <div class="option-button" onclick="selectAndContinue(this)">SaaS</div>
+                 <div class="option-button" onclick="selectAndContinue(this)">E-commerce</div>
+                 <div class="option-button" onclick="selectAndContinue(this)">GreenTech</div>
+            </div>
+        </div>
+
+        <!-- STEP 4 (STARTUP): TEAM SIZE -->
+        <div id="step-4-startup" class="onboarding-step">
+            <h2>What is your current team size?</h2>
+            <div class="options-grid">
+                <div class="option-button" onclick="selectAndContinue(this)">Just me</div>
+                <div class="option-button" onclick="selectAndContinue(this)">2-5 people</div>
+                <div class="option-button" onclick="selectAndContinue(this)">6-10 people</div>
+                <div class="option-button" onclick="selectAndContinue(this)">11+ people</div>
+            </div>
+        </div>
+        
+        <!-- STEP 5 (STARTUP): FUNDRAISING GOAL -->
+        <div id="step-5-startup" class="onboarding-step">
+            <h2>What is your primary fundraising goal?</h2>
+            <div class="options-grid">
+                <div class="option-button" onclick="selectAndContinue(this)">$50k - $250k</div>
+                <div class="option-button" onclick="selectAndContinue(this)">$250k - $1M</div>
+                <div class="option-button" onclick="selectAndContinue(this)">$1M - $5M</div>
+                <div class="option-button" onclick="selectAndContinue(this)">$5M+</div>
+            </div>
+        </div>
+        
+        <!-- =================================================================== -->
+        <!-- INVESTOR-SPECIFIC QUESTIONS -->
+        <!-- =================================================================== -->
+
+        <!-- STEP 3 (INVESTOR): INVESTOR TYPE -->
+        <div id="step-3-investor" class="onboarding-step">
+            <h2>What type of investor are you?</h2>
+            <div class="options-grid two-columns">
+                <div class="option-button" onclick="selectAndContinue(this)">Angel Investor</div>
+                <div class="option-button" onclick="selectAndContinue(this)">Venture Capital</div>
+                <div class="option-button" onclick="selectAndContinue(this)">Family Office</div>
+                <div class="option-button" onclick="selectAndContinue(this)">Corporate VC</div>
+            </div>
+        </div>
+
+        <!-- STEP 4 (INVESTOR): REGION FOCUS (Multi-select) -->
+        <div id="step-4-investor" class="onboarding-step">
+            <h2>Which geographical regions do you invest in?</h2>
+            <p>Select all that apply.</p>
+            <div class="options-grid two-columns">
+                 <div class="option-button" onclick="toggleSelection(this)">North America</div>
+                 <div class="option-button" onclick="toggleSelection(this)">Europe</div>
+                 <div class="option-button" onclick="toggleSelection(this)">Asia</div>
+                 <div class="option-button" onclick="toggleSelection(this)">LATAM</div>
+                 <div class="option-button" onclick="toggleSelection(this)">Africa</div>
+                 <div class="option-button" onclick="toggleSelection(this)">Global</div>
+            </div>
+            <button class="btn btn-primary btn-continue" onclick="nextStep()">Continue</button>
+        </div>
+
+        <!-- STEP 5 (INVESTOR): CHECK SIZE -->
+        <div id="step-5-investor" class="onboarding-step">
+            <h2>What is your typical investment check size?</h2>
+            <div class="options-grid">
+                <div class="option-button" onclick="selectAndContinue(this)">&lt; $25k</div>
+                <div class="option-button" onclick="selectAndContinue(this)">$25k - $100k</div>
+                <div class="option-button" onclick="selectAndContinue(this)">$100k - $500k</div>
+                <div class="option-button" onclick="selectAndContinue(this)">$500k - $1M+</div>
+            </div>
+        </div>
+
+        <!-- =================================================================== -->
+        <!-- PRICING & FINAL STEPS -->
+        <!-- =================================================================== -->
+
+        <!-- STEP 6 (STARTUP): PRICING -->
+        <div id="step-6-startup" class="onboarding-step">
+            <h2>One last step. Choose your plan.</h2>
+            <div class="pricing-grid">
+                <!-- Free Plan -->
+                <div class="pricing-card">
+                    <h3>Free</h3>
+                    <div class="price">$0 <span>/ month</span></div>
+                    <ul>
+                        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"/></svg> Create a professional profile</li>
+                        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"/></svg> Standard feed visibility</li>
+                        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"/></svg> Connect with up to 5 investors/month</li>
+                    </ul>
+                    <button class="btn btn-secondary" onclick="finishOnboarding('startup-free')">Choose Free</button>
+                </div>
+                <!-- Pro Plan -->
+                <div class="pricing-card pro">
+                    <div class="recommended-badge">Most Popular</div>
+                     <h3>Pro</h3>
+                    <div class="price">$25 <span>/ month</span></div>
+                     <ul>
+                        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"/></svg> Up to 25 investor connections/month</li>
+                        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"/></svg> <strong>Priority placement</strong> in feeds</li>
+                        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"/></svg> Access to advanced filters</li>
+                        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"/></svg> AI-Powered meeting analysis</li>
+                    </ul>
+                     <button class="btn btn-primary" onclick="finishOnboarding('startup-pro')">Choose Pro</button>
+                </div>
+                <!-- Ultra Plan -->
+                <div class="pricing-card">
+                     <h3>Ultra</h3>
+                    <div class="price">$79 <span>/ month</span></div>
+                     <ul>
+                        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"/></svg> <strong>Unlimited</strong> investor connections</li>
+                        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"/></svg> <strong>Top placement</strong> in feeds</li>
+                        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"/></svg> Featured in “Spotlight” carousel</li>
+                        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"/></svg> Auto-outreach to matching investors</li>
+                    </ul>
+                     <button class="btn btn-secondary" onclick="finishOnboarding('startup-ultra')">Choose Ultra</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- STEP 6 (INVESTOR): PRICING -->
+        <div id="step-6-investor" class="onboarding-step">
+            <h2>One last step. Choose your plan.</h2>
+            <div class="pricing-grid pricing-grid-investor">
+                <!-- Free Plan -->
+                <div class="pricing-card">
+                    <h3>Free</h3>
+                    <div class="price">$0 <span>/ month</span></div>
+                    <ul>
+                        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"/></svg> Access to standard startup feed</li>
+                        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"/></svg> Standard search filters</li>
+                        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"/></svg> Connect with up to 10 startups/month</li>
+                    </ul>
+                    <button class="btn btn-secondary" onclick="finishOnboarding('investor-free')">Continue with Free</button>
+                </div>
+                <!-- Premium Plan -->
+                <div class="pricing-card pro">
+                     <h3>Premium</h3>
+                    <div class="price">$49 <span>/ month</span></div>
+                     <ul>
+                        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"/></svg> <strong>Unlimited</strong> startup connections</li>
+                        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"/></svg> Access to <strong>curated Premium feed</strong></li>
+                        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"/></svg> Advanced deal-flow filters</li>
+                        <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"/></svg> Lower platform commission on deals</li>
+                    </ul>
+                     <button class="btn btn-primary" onclick="finishOnboarding('investor-premium')">Go Premium</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- FINAL STEP: LOGIN TO APP -->
+        <div id="step-7" class="onboarding-step">
+            <h1>Welcome to Syndesis!</h1>
+            <p>Redirecting you to the dashboard...</p>
+            <!-- Add a spinner/loader here if you like -->
+        </div>
+
+
+    </div>
+
+
+    <script>
+        // --- State Management ---
+        const userProfile = {
+            role: null,
+            plan: null,
+        };
+
+        // --- Flow Control ---
+        // Defines the sequence of steps for each role.
+        const onboardingFlow = {
+            startup: ['step-2', 'step-3-startup', 'step-4-startup', 'step-5-startup', 'step-6-startup'],
+            investor: ['step-2', 'step-3-investor', 'step-4-investor', 'step-5-investor', 'step-6-investor']
+        };
+        
+        // --- DOM Elements ---
+        const steps = document.querySelectorAll('.onboarding-step');
+        const progressBarContainer = document.querySelector('.progress-bar-container');
+        const progressBar = document.querySelector('.progress-bar');
+        const onboardingContainer = document.querySelector('.onboarding-container');
+
+        // --- Core Navigation ---
+        function goToStep(stepId) {
+            steps.forEach(step => step.classList.remove('active'));
+            const nextStepElement = document.getElementById(stepId);
+            if (nextStepElement) {
+                nextStepElement.classList.add('active');
+                updateProgressBar();
+            } else {
+                console.error("Step not found:", stepId);
+            }
+        }
+        
+        function nextStep() {
+            const currentStepElement = document.querySelector('.onboarding-step.active');
+            if (!currentStepElement) return;
+
+            const currentId = currentStepElement.id;
+            const currentFlow = onboardingFlow[userProfile.role];
+            if (!currentFlow) return;
+
+            const currentIndex = currentFlow.indexOf(currentId);
+            const nextIndex = currentIndex + 1;
+
+            if (nextIndex < currentFlow.length) {
+                const nextStepId = currentFlow[nextIndex];
+                goToStep(nextStepId);
+            } else {
+                 console.log("End of flow reached.");
+                 // This case should ideally be handled by the pricing page buttons
+            }
+        }
+
+        function updateProgressBar() {
+            const activeStep = document.querySelector('.onboarding-step.active');
+            if (!activeStep || !userProfile.role) {
+                progressBarContainer.style.display = 'none';
+                onboardingContainer.classList.remove('progress-visible');
+                return;
+            }
+
+            const currentFlow = onboardingFlow[userProfile.role];
+            const stepId = activeStep.id;
+            const stepIndex = currentFlow.indexOf(stepId);
+            
+            if (stepIndex !== -1) {
+                progressBarContainer.style.display = 'block';
+                onboardingContainer.classList.add('progress-visible');
+                const totalSteps = currentFlow.length;
+                const progress = ((stepIndex + 1) / totalSteps) * 100;
+                progressBar.style.width = `${progress}%`;
+            } else {
+                // Hide progress bar on non-flow steps (like step-1 and step-7)
+                progressBarContainer.style.display = 'none';
+                onboardingContainer.classList.remove('progress-visible');
+            }
+        }
+        
+        // --- Interaction Handlers ---
+        
+        function selectRole(role) {
+            userProfile.role = role;
+            console.log("User selected role:", userProfile.role);
+            
+            // Start the appropriate flow
+            const firstQuestionId = onboardingFlow[role][1]; // The first question is at index 1
+            goToStep(firstQuestionId);
+        }
+
+        function toggleSelection(element) {
+            element.classList.toggle('selected');
+        }
+
+        function selectAndContinue(element) {
+            // Deselect siblings
+            const parent = element.parentElement;
+            parent.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
+            
+            // Select clicked element
+            element.classList.add('selected');
+            
+            // Wait a moment before proceeding
+            setTimeout(nextStep, 300);
+        }
+
+        function finishOnboarding(plan) {
+            userProfile.plan = plan;
+            console.log("User selected plan:", userProfile.plan);
+            console.log("Final User Profile:", userProfile);
+            
+            goToStep('step-7'); // Go to final welcome screen
+            
+            setTimeout(() => {
+                 // window.location.href = '/dashboard'; // <-- UNCOMMENT FOR REAL APP
+                 alert("Redirecting to your dashboard with the '" + plan + "' plan!"); // Placeholder
+            }, 2000);
+        }
+
+        // --- Initializer ---
+        document.addEventListener("DOMContentLoaded", () => {
+            goToStep('step-1');
+        });
+
+    </script>
+
+</body>
+</html>
