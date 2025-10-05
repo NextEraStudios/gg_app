@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syndesis Feed</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Unicons for Icons -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+</head>
+<body>
+
+    <!-- Mobile-Only Top Header -->
+    <header class="mobile-header">
+        <a href="#" class="logo home-link">
+            <img src="syndesis-removebg-preview.svg" alt="Syndesis Logo" class="logo-img">
+        </a>
+        <div class="mobile-header-icons">
+            <a href="#" class="mobile-icon-link" id="mobile-search-btn"><i class="uil uil-search"></i></a>
+            <a href="#" class="mobile-icon-link"><i class="uil uil-bell"></i></a>
+        </div>
+    </header>
+
+    <div class="app-layout">
+        <!-- Desktop Left Sidebar Navigation -->
+        <aside class="desktop-sidebar">
+            <div class="sidebar-top">
+                <a href="#" class="logo home-link">
+                     <img src="syndesis-removebg-preview.svg" alt="Syndesis Logo" class="logo-img">
+                </a>
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li><a href="#" class="nav-link active home-link"><i class="uil uil-estate"></i><span>Home</span></a></li>
+                        <li><a href="messages.html" class="nav-link"><i class="uil uil-message"></i><span>Messages</span></a></li>
+                        <li><a href="watchlist.html" class="nav-link"><i class="uil uil-star"></i><span>Watchlist</span></a></li>
+                        <li><a href="#" class="nav-link upgrade-link"><i class="uil uil-rocket"></i><span>Upgrade</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="sidebar-bottom">
+                 <a href="#" class="nav-link profile-link"><i class="uil uil-user-circle"></i><span>Profile</span></a>
+                 <a href="#" class="nav-link"><i class="uil uil-signout"></i><span>Logout</span></a>
+            </div>
+        </aside>
+
+        <!-- Main Content Feed -->
+        <main class="feed-container">
+            <div class="desktop-header-actions">
+                <a href="#" class="desktop-icon-btn" id="desktop-search-btn"><i class="uil uil-search"></i></a>
+                <a href="#" class="desktop-icon-btn"><i class="uil uil-bell"></i></a>
+            </div>
+
+            <header class="feed-header">
+                <h1>Investors</h1>
+            </header>
+
+            <div class="premium-banner" id="premium-banner">
+                <button class="banner-close" id="close-banner-btn">&times;</button>
+                <div class="banner-content">
+                    <h4><i class="uil uil-rocket"></i> Reach Your Target Investors</h4>
+                    <p>Upgrade to reach investors directly interested in your sector.</p>
+                </div>
+                <a href="#" class="btn-upgrade upgrade-link">Upgrade Now</a>
+            </div>
+
+            <div class="feed-sorting">
+                <button class="sort-btn active">Recommended</button>
+                <button class="sort-btn">Newest</button>
+                <button class="sort-btn">Most Active</button>
+            </div>
+            
+            <div id="investor-feed" class="feed"></div>
+        </main>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-nav">
+        <a href="#" class="nav-link active home-link"><i class="uil uil-estate"></i><span>Home</span></a>
+        <a href="messages.html" class="nav-link"><i class="uil uil-message"></i><span>Messages</span></a>
+        <a href="watchlist.html" class="nav-link"><i class="uil uil-star"></i><span>Watchlist</span></a>
+        <a href="#" class="nav-link upgrade-link"><i class="uil uil-rocket"></i><span>Upgrade</span></a>
+        <a href="#" class="nav-link profile-link"><i class="uil uil-user-circle"></i><span>Profile</span></a>
+    </nav>
+
+    <!-- SEARCH MODAL -->
+    <div class="search-modal-overlay" id="search-modal">
+        <div class="search-modal-content">
+            <header class="search-modal-header">
+                <h2>Filters</h2>
+                <button class="modal-close-btn" id="modal-close-btn">&times;</button>
+            </header>
+            <form class="search-modal-form" id="filter-form">
+                <!-- NEW: Search by Typing -->
+                <div class="filter-group">
+                    <input type="text" placeholder="Search by name, keyword, etc.">
+                </div>
+
+                <div class="filter-group">
+                    <label>Region</label>
+                    <div class="input-row">
+                        <select><option>Continent</option></select>
+                        <select><option>Country</option></select>
+                        <select><option>State/City</option></select>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label>Sector & Sub-sector</label>
+                    <div class="checkbox-grid">
+                        <div class="checkbox-item"><input type="checkbox" id="s-fintech" name="sector" checked><label for="s-fintech">Fintech</label></div>
+                        <div class="checkbox-item"><input type="checkbox" id="s-health" name="sector"><label for="s-health">Health</label></div>
+                        <div class="checkbox-item"><input type="checkbox" id="s-climate" name="sector"><label for="s-climate">Climate</label></div>
+                        <div class="checkbox-item"><input type="checkbox" id="s-ai" name="sector"><label for="s-ai">AI</label></div>
+                        <div class="checkbox-item"><input type="checkbox" id="s-consumer" name="sector"><label for="s-consumer">Consumer</label></div>
+                        <div class="checkbox-item"><input type="checkbox" id="s-saas" name="sector"><label for="s-saas">SaaS</label></div>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label>Stage</label>
+                     <div class="checkbox-grid">
+                        <div class="checkbox-item"><input type="checkbox" id="st-idea"><label for="st-idea">Idea</label></div>
+                        <div class="checkbox-item"><input type="checkbox" id="st-mvp"><label for="st-mvp">MVP</label></div>
+                        <div class="checkbox-item"><input type="checkbox" id="st-preseed"><label for="st-preseed">Pre-seed</label></div>
+                        <div class="checkbox-item"><input type="checkbox" id="st-seed"><label for="st-seed">Seed</label></div>
+                        <div class="checkbox-item"><input type="checkbox" id="st-a"><label for="st-a">Series A</label></div>
+                        <div class="checkbox-item"><input type="checkbox" id="st-b"><label for="st-b">Series B+</label></div>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Most Selective</label>
+                    <div class="toggle-group">
+                        <div class="toggle-item">
+                            <span>Only verified traction</span>
+                            <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+                        </div>
+                         <div class="toggle-item">
+                            <span>Due-diligence ready</span>
+                            <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+            <footer class="search-modal-footer">
+                <button class="btn-clear" id="clear-filters-btn">Clear Filters</button>
+                <button class="btn-apply" id="apply-filters-btn">Apply Filters</button>
+            </footer>
+        </div>
+    </div>
+
+    
+
+
+    <script src="js/nav-helper.js"></script>
+    <script src="js/app.js"></script>
+    
+    <script>
+        // This tells our helper that the current user is a 'startup'
+        // and sets their home page accordingly.
+        setUserContext('startup', 'startup_feed.html');
+    </script>
+</body>
+</html>

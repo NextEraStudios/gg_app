@@ -1,0 +1,195 @@
+/* --- Watchlist Page Specific Styles --- */
+.watchlist-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.watchlist-header h1 {
+    font-size: 2.5rem;
+}
+
+.watchlist-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.watchlist-tab-btn {
+    padding: 1rem 1.5rem;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    cursor: pointer;
+    position: relative;
+    border-bottom: 3px solid transparent;
+}
+.watchlist-tab-btn.active {
+    color: var(--primary-accent);
+    border-bottom-color: var(--primary-accent);
+}
+
+.watchlist-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+.search-bar {
+    position: relative;
+    flex-grow: 1;
+}
+.search-bar i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+}
+.search-bar input {
+    width: 100%;
+    background-color: var(--input-background);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+.sort-dropdown {
+    background-color: var(--input-background);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    color: var(--text-primary);
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23cccccc' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+}
+.bulk-action-btn {
+    background-color: transparent;
+    border: 1px solid #e74c3c;
+    color: #e74c3c;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* --- Watchlist Content --- */
+.watchlist-content {
+    display: none;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.watchlist-content.active {
+    display: flex;
+}
+.empty-state {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 3rem;
+}
+
+.watchlist-item {
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+.item-main-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.drag-handle {
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    cursor: grab;
+}
+.item-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+}
+.item-details h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+}
+.item-details p {
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+}
+.item-tags {
+    display: flex;
+    gap: 0.5rem;
+}
+.item-tags .tag {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.item-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+.item-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+.item-btn {
+    background-color: var(--input-background);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.item-btn.remove-btn {
+    padding: 0.5rem;
+    width: 36px;
+    color: #e74c3c;
+}
+
+.item-notes-container {
+    display: none; /* Hidden by default */
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+.item-notes-container.visible {
+    display: block;
+}
+.item-notes-container textarea {
+    width: 100%;
+    min-height: 80px;
+    background-color: var(--input-background);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem;
+    color: var(--text-primary);
+    font-size: 1rem;
+    resize: vertical;
+}
+.item-notes-container.has-note {
+    border-top-style: dashed;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .item-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+}

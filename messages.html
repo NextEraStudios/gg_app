@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - Syndesis</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/messages.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+</head>
+<body class="messages-page">
+
+    <!-- Mobile-Only Top Header -->
+    <header class="mobile-header">
+        <a href="#" class="logo home-link"><img src="syndesis-removebg-preview.svg" alt="Syndesis Logo" class="logo-img"></a>
+        <div class="mobile-header-icons">
+            <a href="#" class="mobile-icon-link" id="mobile-search-btn"><i class="uil uil-search"></i></a>
+            <a href="#" class="mobile-icon-link"><i class="uil uil-bell"></i></a>
+        </div>
+    </header>
+
+    <div class="app-layout">
+        <!-- Desktop Left Sidebar Navigation -->
+        <aside class="desktop-sidebar">
+            <div class="sidebar-top">
+                <a href="#" class="logo home-link"><img src="syndesis-removebg-preview.svg" alt="Syndesis Logo" class="logo-img"></a>
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li><a href="#" class="nav-link home-link"><i class="uil uil-estate"></i><span>Home</span></a></li>
+                        <li><a href="messages.html" class="nav-link active"><i class="uil uil-message"></i><span>Messages</span></a></li>
+                        <li><a href="watchlist.html" class="nav-link"><i class="uil uil-star"></i><span>Watchlist</span></a></li>
+                        <li><a href="#" class="nav-link upgrade-link"><i class="uil uil-rocket"></i><span>Upgrade</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="sidebar-bottom">
+                 <a href="#" class="nav-link profile-link"><i class="uil uil-user-circle"></i><span>Profile</span></a>
+                 <a href="#" class="nav-link"><i class="uil uil-signout"></i><span>Logout</span></a>
+            </div>
+        </aside>
+
+        <!-- Main Content: Messages & Requests -->
+        <main class="feed-container messages-container">
+            
+            <div class="page-toggle">
+                <button class="toggle-btn active" id="show-chats-btn">Chats</button>
+                <button class="toggle-btn" id="show-requests-btn">Requests</button>
+            </div>
+
+            <!-- CHAT INTERFACE -->
+            <div class="chat-interface" id="chat-interface">
+                <!-- Left Panel: Threads List -->
+                <aside class="threads-list">
+                    <div class="thread-item active">
+                        <img src="https://i.pravatar.cc/64?img=3" alt="Dr. Anya Sharma" class="thread-avatar">
+                        <div class="thread-info">
+                            <div class="thread-header">
+                                <span class="thread-name">Dr. Anya Sharma</span>
+                                <span class="thread-role investor">Investor</span>
+                            </div>
+                            <p class="thread-snippet">Sounds great, let's connect next week.</p>
+                        </div>
+                        <div class="unread-badge">2</div>
+                    </div>
+                    <div class="thread-item">
+                        <img src="https://i.pravatar.cc/64?img=4" alt="Mike Chen" class="thread-avatar">
+                        <div class="thread-info">
+                            <div class="thread-header">
+                                <span class="thread-name">Mike Chen</span>
+                                <span class="thread-role founder">Founder @ EcoRoute</span>
+                            </div>
+                            <p class="thread-snippet">Thanks for the feedback on our deck!</p>
+                        </div>
+                    </div>
+                     <div class="thread-item">
+                        <img src="https://i.pravatar.cc/64?img=5" alt="Emily White" class="thread-avatar">
+                        <div class="thread-info">
+                            <div class="thread-header">
+                                <span class="thread-name">Emily White</span>
+                                <span class="thread-role founder">Founder @ EcoRoute</span>
+                            </div>
+                            <p class="thread-snippet">Attachment: One-Pager.pdf</p>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Right Panel: Thread View -->
+                <section class="thread-view">
+                    <header class="thread-view-header">
+                        <div class="user-info">
+                            <img src="https://i.pravatar.cc/64?img=3" alt="Dr. Anya Sharma" class="thread-avatar">
+                            <div>
+                                <span class="thread-name">Dr. Anya Sharma</span>
+                                <span class="thread-role investor">Investor</span>
+                            </div>
+                        </div>
+                        <div class="safety-actions">
+                            <button class="safety-btn"><i class="uil uil-exclamation-triangle"></i> Report</button>
+                            <button class="safety-btn"><i class="uil uil-ban"></i> Block</button>
+                        </div>
+                    </header>
+
+                    <div class="messages-area">
+                        <div class="system-tag"><i class="uil uil-star"></i> Connected via Premium boost</div>
+                        
+                        <div class="message received">
+                            <p>Hi there, saw your startup via a premium placement. Your traction in HealthTech is impressive. Could you share your deck?</p>
+                            <span class="timestamp">10:32 AM <i class="uil uil-check-circle"></i></span>
+                        </div>
+                        <div class="message sent">
+                            <p>Absolutely, Dr. Sharma. Pleased to connect. Here is our latest deck.</p>
+                            <div class="attachment">
+                                <i class="uil uil-file-alt"></i>
+                                <span>Syndesis_Pitch_Deck.pdf</span>
+                            </div>
+                            <span class="timestamp">10:35 AM <i class="uil uil-check-circle"></i></span>
+                        </div>
+                        <div class="message received">
+                            <p>Thanks. I've reviewed it. Looks promising. What are your thoughts on a quick 15-min call next week?</p>
+                            <span class="timestamp">11:15 AM <i class="uil uil-check-circle"></i></span>
+                        </div>
+                        <div class="message sent">
+                            <p>Sounds great, let's connect next week.</p>
+                            <span class="timestamp">11:18 AM <i class="uil uil-check"></i></span>
+                        </div>
+                    </div>
+
+                    <footer class="message-input-area">
+                        <button class="attach-btn"><i class="uil uil-paperclip"></i></button>
+                        <input type="text" placeholder="Type a message...">
+                        <button class="send-btn"><i class="uil uil-message"></i> Send</button>
+                    </footer>
+                </section>
+            </div>
+
+            <!-- REQUESTS INTERFACE (Initially hidden) -->
+            <div class="requests-interface" id="requests-interface" style="display: none;">
+                <div class="requests-tabs">
+                    <button class="req-tab-btn active">Received</button>
+                    <button class="req-tab-btn">Sent</button>
+                </div>
+                <div class="requests-list">
+                    <!-- Demo Received Request -->
+                    <div class="request-card">
+                        <div class="req-card-header">
+                            <div class="req-user-info">
+                                <img src="https://i.pravatar.cc/64?img=1" alt="Jane Doe" class="thread-avatar">
+                                <div>
+                                    <span class="req-name">Jane Doe</span>
+                                    <span class="req-company">Founder @ FinFlow</span>
+                                </div>
+                            </div>
+                            <div class="status pending">Pending</div>
+                        </div>
+                        <div class="req-card-body">
+                            <h5>Booking Request</h5>
+                            <p><strong>Proposed Times:</strong> Oct 10, 2:00 PM EST | Oct 12, 11:00 AM EST</p>
+                            <p><strong>Note:</strong> "Excited to discuss our pre-seed round."</p>
+                        </div>
+                        <div class="req-card-actions">
+                            <button class="req-btn decline">Decline</button>
+                            <button class="req-btn propose">Propose New Time</button>
+                            <button class="req-btn accept">Accept</button>
+                        </div>
+                    </div>
+                    <!-- Demo Accepted Request -->
+                    <div class="request-card">
+                        <div class="req-card-header">
+                            <div class="req-user-info">
+                                 <img src="https://i.pravatar.cc/64?img=2" alt="John Smith" class="thread-avatar">
+                                <div>
+                                    <span class="req-name">John Smith</span>
+                                    <span class="req-company">Investor @ VC Firm</span>
+                                </div>
+                            </div>
+                            <div class="status accepted">Accepted</div>
+                        </div>
+                        <div class="req-card-body">
+                           <h5>Connection Request</h5>
+                           <p><strong>Note:</strong> "Would love to connect and follow your progress."</p>
+                        </div>
+                        <div class="req-card-actions">
+                           <button class="req-btn completed">Mark as Completed</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-nav">
+        <a href="#" class="nav-link home-link"><i class="uil uil-estate"></i><span>Home</span></a>
+        <a href="messages.html" class="nav-link active"><i class="uil uil-message"></i><span>Messages</span></a>
+        <a href="watchlist.html" class="nav-link"><i class="uil uil-star"></i><span>Watchlist</span></a>
+        <a href="#" class="nav-link upgrade-link"><i class="uil uil-rocket"></i><span>Upgrade</span></a>
+        <a href="#" class="nav-link profile-link"><i class="uil uil-user-circle"></i><span>Profile</span></a>
+    </nav>
+    
+    <script src="js/nav-helper.js"></script>
+    <script src="js/messages.js"></script>
+</body>
+</html>

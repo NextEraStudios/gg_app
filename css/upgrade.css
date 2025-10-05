@@ -1,0 +1,146 @@
+/* css/upgrade.css */
+
+.upgrade-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+.upgrade-header h1 {
+    font-size: 2.5rem;
+}
+.upgrade-header p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+}
+
+/* --- UPDATED: Pricing Grid --- */
+.pricing-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    
+    /* --- KEY CHANGE --- */
+    /* This forces the cards to stay on one line. */
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+.pricing-grid-investor {
+    justify-content: center;
+}
+
+/* --- UPDATED: Pricing Card --- */
+.pricing-card {
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+    
+    /* --- KEY CHANGES --- */
+    /* flex: <grow> <shrink> <basis> */
+    /* grow: 0 -> Don't grow larger than the basis. */
+    /* shrink: 1 -> ALLOW the card to shrink if space is limited. */
+    /* basis: 320px -> Aim for this width. */
+    flex: 0 1 320px;
+    min-width: 260px; /* Add a minimum width to prevent content from looking crushed */
+
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pricing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.pricing-card.pro {
+    border-color: var(--primary-accent);
+}
+.recommended-badge {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    background-color: var(--primary-accent);
+    color: #000;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 700 !important;
+    border-top-right-radius: 16px;
+    border-bottom-left-radius: 16px;
+}
+
+.pricing-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.price {
+    font-size: 2.5rem;
+    font-weight: 700 !important;
+    color: var(--primary-accent);
+    margin-bottom: 1.5rem;
+}
+.price span {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-weight: 500 !important;
+}
+
+.pricing-card ul {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+}
+.pricing-card ul li {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+.pricing-card ul svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: var(--primary-accent);
+}
+
+.btn {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700 !important;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.2s;
+}
+.btn:hover {
+    transform: scale(1.03);
+}
+.btn-primary {
+    background-color: var(--primary-accent);
+    color: #000;
+}
+.btn-secondary {
+    background-color: var(--input-background);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+.btn.disabled {
+    background-color: var(--input-background);
+    color: var(--text-secondary);
+    cursor: not-allowed;
+}
+
+/* --- BEST PRACTICE FOR MOBILE --- */
+/* On smaller screens, forcing a single line is bad UX.
+   This media query allows the cards to stack vertically on mobile. */
+@media (max-width: 768px) {
+    .pricing-grid {
+        flex-wrap: wrap; /* Allow stacking on mobile */
+    }
+}

@@ -786,11 +786,32 @@
             console.log("User selected plan:", userProfile.plan);
             console.log("Final User Profile:", userProfile);
             
-            goToStep('step-7'); // Go to final welcome screen
+            // Go to final welcome screen
+            goToStep('step-7'); 
             
+            // Determine the correct redirect URL based on role and plan
+            let redirectUrl = '';
+            const isFreePlan = plan.includes('free');
+            const isInvestor = userProfile.role === 'investor';
+            const isStartup = userProfile.role === 'startup';
+
+            if (isInvestor && isFreePlan) {
+                redirectUrl = 'investor_feed.html';
+            } else if (isStartup && isFreePlan) {
+                redirectUrl = 'startup_feed.html';
+            } else if (isInvestor && !isFreePlan) {
+                redirectUrl = 'investor_premium.html';
+            } else if (isStartup && !isFreePlan) {
+                redirectUrl = 'startup_premium.html';
+            }
+            
+            // Redirect to the determined URL after a short delay
             setTimeout(() => {
-                 // window.location.href = '/dashboard'; // <-- UNCOMMENT FOR REAL APP
-                 alert("Redirecting to your dashboard with the '" + plan + "' plan!"); // Placeholder
+                if (redirectUrl) {
+                    window.location.href = redirectUrl;
+                } else {
+                    console.error('Could not determine a redirect URL for the selected options.');
+                }
             }, 2000);
         }
 

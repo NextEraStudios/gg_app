@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watchlist - Syndesis</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/watchlist.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+</head>
+<body class="watchlist-page">
+
+    <!-- Mobile-Only Top Header -->
+    <header class="mobile-header">
+        <a href="#" class="logo home-link"><img src="syndesis-removebg-preview.svg" alt="Syndesis Logo" class="logo-img"></a>
+        <div class="mobile-header-icons">
+            <a href="#" class="mobile-icon-link" id="mobile-search-btn"><i class="uil uil-search"></i></a>
+            <a href="#" class="mobile-icon-link"><i class="uil uil-bell"></i></a>
+        </div>
+    </header>
+
+    <div class="app-layout">
+        <!-- Desktop Left Sidebar Navigation -->
+        <aside class="desktop-sidebar">
+            <div class="sidebar-top">
+                <a href="#" class="logo home-link"><img src="syndesis-removebg-preview.svg" alt="Syndesis Logo" class="logo-img"></a>
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li><a href="#" class="nav-link home-link"><i class="uil uil-estate"></i><span>Home</span></a></li>
+                        <li><a href="messages.html" class="nav-link"><i class="uil uil-message"></i><span>Messages</span></a></li>
+                        <li><a href="watchlist.html" class="nav-link active"><i class="uil uil-star"></i><span>Watchlist</span></a></li>
+                        <li><a href="#" class="nav-link upgrade-link"><i class="uil uil-rocket"></i><span>Upgrade</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="sidebar-bottom">
+                 <a href="#" class="nav-link profile-link"><i class="uil uil-user-circle"></i><span>Profile</span></a>
+                 <a href="#" class="nav-link"><i class="uil uil-signout"></i><span>Logout</span></a>
+            </div>
+        </aside>
+
+        <!-- Main Content: Watchlist -->
+        <main class="feed-container">
+            <header class="watchlist-header">
+                <h1>Watchlist</h1>
+            </header>
+
+            <div class="watchlist-tabs">
+                <button class="watchlist-tab-btn active" data-tab="startups">Startups I'm Watching</button>
+                <button class="watchlist-tab-btn" data-tab="investors">Investors I'm Watching</button>
+            </div>
+            
+            <div class="watchlist-controls">
+                <div class="search-bar">
+                    <i class="uil uil-search"></i>
+                    <input type="text" placeholder="Search watchlist...">
+                </div>
+                <select class="sort-dropdown">
+                    <option>Sort by: Recently Updated</option>
+                    <option>Sort by: Newest</option>
+                    <option>Sort by: Custom Order</option>
+                </select>
+                <button class="bulk-action-btn"><i class="uil uil-trash-alt"></i> Bulk Remove</button>
+            </div>
+
+            <!-- WATCHLIST CONTENT -->
+            <div class="watchlist-content active" id="startups-watchlist">
+                <!-- Demo Watchlist Item 1 -->
+                <div class="watchlist-item">
+                    <div class="item-main-info">
+                        <i class="uil uil-draggabledots drag-handle"></i>
+                        <img src="https://placehold.co/100x100/c1ffb4/0c2b35/png?text=QL" alt="QuantumLeap AI Logo" class="item-logo">
+                        <div class="item-details">
+                            <h3>QuantumLeap AI</h3>
+                            <p>AI-driven drug discovery platform.</p>
+                            <div class="item-tags">
+                                <span class="tag">HealthTech</span>
+                                <span class="tag">Seed</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-meta">
+                        <span>Last Update: 2 days ago</span>
+                        <div class="item-actions">
+                            <button class="item-btn toggle-notes-btn">Add Note</button>
+                            <button class="item-btn">View Profile</button>
+                            <button class="item-btn remove-btn"><i class="uil uil-trash-alt"></i></button>
+                        </div>
+                    </div>
+                    <div class="item-notes-container">
+                        <textarea placeholder="Private notes (e.g., Pros, Cons, Next Steps)..."></textarea>
+                    </div>
+                </div>
+
+                 <!-- Demo Watchlist Item 2 -->
+                <div class="watchlist-item">
+                    <div class="item-main-info">
+                        <i class="uil uil-draggabledots drag-handle"></i>
+                        <img src="https://placehold.co/100x100/FFFFFF/000000/png?text=F" alt="FinFlow Logo" class="item-logo">
+                        <div class="item-details">
+                            <h3>FinFlow</h3>
+                            <p>Automated financial modeling for SaaS companies.</p>
+                            <div class="item-tags">
+                                <span class="tag">FinTech</span>
+                                <span class="tag">Pre-seed</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-meta">
+                        <span>Last Update: 1 week ago</span>
+                        <div class="item-actions">
+                            <button class="item-btn toggle-notes-btn">Edit Note</button>
+                            <button class="item-btn">View Profile</button>
+                            <button class="item-btn remove-btn"><i class="uil uil-trash-alt"></i></button>
+                        </div>
+                    </div>
+                    <div class="item-notes-container visible has-note">
+                        <textarea>Met with Jane, strong founder. Need to see more traction on the user growth side before committing. Next step: Follow up in Q4.</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="watchlist-content" id="investors-watchlist">
+                <p class="empty-state">You are not currently watching any investors.</p>
+            </div>
+
+         </main>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-nav">
+        <a href="#" class="nav-link home-link"><i class="uil uil-estate"></i><span>Home</span></a>
+        <a href="messages.html" class="nav-link"><i class="uil uil-message"></i><span>Messages</span></a>
+        <a href="watchlist.html" class="nav-link active"><i class="uil uil-star"></i><span>Watchlist</span></a>
+        <a href="#" class="nav-link upgrade-link"><i class="uil uil-rocket"></i><span>Upgrade</span></a>
+        <a href="#" class="nav-link profile-link"><i class="uil uil-user-circle"></i><span>Profile</span></a>
+    </nav>
+    
+    <script src="js/nav-helper.js"></script>
+    <script src="js/messages.js"></script>
+</body>
+</html>

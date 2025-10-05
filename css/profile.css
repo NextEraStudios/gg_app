@@ -1,0 +1,175 @@
+/* css/profile.css */
+
+.profile-container {
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* --- Profile Header --- */
+.profile-header {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    align-items: flex-start;
+}
+.profile-logo {
+    width: 128px;
+    height: 128px;
+    border-radius: 16px;
+    flex-shrink: 0;
+}
+.profile-logo.is-avatar {
+    border-radius: 50%;
+}
+.header-info {
+    flex-grow: 1;
+}
+.header-info h1 {
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+.header-info .one-liner {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+.header-tags {
+    display: flex;
+    gap: 1.5rem;
+    color: var(--text-secondary);
+}
+.header-tags span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.header-actions .btn-primary {
+    background-color: var(--primary-accent);
+    color: #000;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700 !important;
+    cursor: pointer;
+}
+.badge {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px;
+    font-weight: 700 !important;
+    color: white;
+}
+.badge.accelerator { background: #e4a121; }
+.badge.premium { background: linear-gradient(90deg, #5b22d3, #215ae4); }
+
+/* --- Profile Body --- */
+.profile-body {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+}
+.profile-main {
+    flex: 2; /* Takes up 2/3 of the space */
+}
+.profile-sidebar {
+    flex: 1; /* Takes up 1/3 of the space */
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.profile-section {
+    margin-bottom: 2rem;
+}
+.profile-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.profile-section p {
+    line-height: 1.7;
+    color: var(--text-secondary);
+}
+
+/* --- Specific Section Styles --- */
+.founder-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+.founder-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: var(--input-background);
+    padding: 1rem;
+    border-radius: 12px;
+}
+.founder-card img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+.founder-info h4 { font-size: 1rem; }
+.founder-info p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.2; }
+
+.materials-list { display: flex; flex-direction: column; gap: 1rem; }
+.material-item {
+    background-color: var(--input-background);
+    padding: 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: background-color 0.2s;
+}
+.material-item:hover { background-color: rgba(255, 255, 255, 0.1); }
+.material-item i { font-size: 1.5rem; color: var(--primary-accent); }
+
+.metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.metric-item span { display: block; color: var(--text-secondary); margin-bottom: 0.25rem; }
+.metric-item strong { font-size: 1.25rem; color: var(--primary-accent); }
+
+.seeking-info h3 { font-size: 1.25rem; }
+.seeking-info p { margin-top: 0.5rem; }
+.btn-secondary.full-width {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background: var(--input-background);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 8px;
+}
+
+.portfolio-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+.portfolio-item {
+    background-color: var(--input-background);
+    padding: 1rem;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+}
+.portfolio-item img { max-width: 100%; filter: grayscale(100%) contrast(0%) brightness(2); }
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+    .profile-header { flex-direction: column; align-items: center; text-align: center; }
+    .header-tags { justify-content: center; }
+    .profile-body { flex-direction: column; }
+}
+@media (max-width: 768px) {
+    .founder-grid, .metrics-grid, .portfolio-grid { grid-template-columns: 1fr; }
+}
